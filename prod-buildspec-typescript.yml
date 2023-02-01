@@ -18,15 +18,6 @@ phases:
       - pwd
       - ls
 
-batch:
-  build-list:
-    - identifier: iad
-      env:
-        PUBLISH_TO_REGION: us-east-1
-    - identifier: pdx
-      env:
-        PUBLISH_TO_REGION: us-west-2
-
   build:
     commands:
       - echo Entered the build phase...
@@ -35,8 +26,7 @@ batch:
       - ls
       - npm install && npm run build
       - ./setup.sh
-      - ../deregister-all.sh $PUBLISH_TO_REGION
-      - ../publish.sh $PUBLISH_TO_REGION
+      - ../publish-resource-regions.sh
     finally:
       - cat rpdk.log
       - ./cleanup.sh    
